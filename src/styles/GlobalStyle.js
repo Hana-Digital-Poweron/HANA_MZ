@@ -47,6 +47,13 @@ const GlobalStyle = createGlobalStyle`
       margin: 0 8px; // 더 작은 화면에서 여백 조정
       width: calc(100% - 16px); // 더 작은 화면에 맞춰 너비 조정
     }
+
+     @media (hover: hover) {
+    body {
+      width: 390px;
+      margin: 0 auto;
+    }
+  }
   }
 `;
 
