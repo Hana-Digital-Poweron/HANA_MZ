@@ -20,6 +20,7 @@ const GlobalStyle = createGlobalStyle`
     text-align: center;
     margin: 0;
     min-height: 100vh;
+    line-height: 150%; /* 16.5px */
   }
 
   .responsive-container {
@@ -46,12 +47,6 @@ const GlobalStyle = createGlobalStyle`
     @media (max-width: 480px) {
       margin: 0 8px; // 더 작은 화면에서 여백 조정
       width: calc(100% - 16px); // 더 작은 화면에 맞춰 너비 조정
-    }
-
-     @media (hover: hover) {
-    body {
-      width: 390px;
-      margin: 0 auto;
     }
   }
   }

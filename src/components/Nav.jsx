@@ -10,7 +10,8 @@ const NavContainer = styled.nav`
   display: flex;
   justify-content: space-around;
   align-items: center;
-  position: relative;
+  position: fixed;
+  bottom: 0;
   width: 100%;
   max-width: 390px;
   margin: 0 auto;

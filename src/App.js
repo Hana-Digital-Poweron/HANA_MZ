@@ -1,13 +1,35 @@
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-// import Login from './pages/Login/Login';
-import Main from './pages/main';
+
+// 온보딩
+import Onboarding from './pages/Onboarding/OnboardingPage';
+import Login from './pages/Onboarding/LoginPage';
+
+// 메인, 메뉴
+import Main from './pages/Main/MainPage';
+import Menu from './pages/Menu/MenuPage';
+
+// 챗봇
+import Salary from './pages/Chatbot/1_Salary/SalaryPage';
+import Consult from './pages/Chatbot/2_Consult/ConsultPage';
+import Contract from './pages/Chatbot/3_Contract/ContractPage';
+import InternationalSend from './pages/Chatbot/4_InternationalSend/InternationalSendPage';
+
 
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-         <Route path="/" element={<Main />} />
+         <Route path="/" element={<Onboarding />} />
+         <Route path="/login" element={<Login />} />
+
+         <Route path="/main" element={<Main />} />
+         <Route path="/menu" element={<Menu />} />
+
+         <Route path="/salary" element={<Salary />} />
+         <Route path="/consult" element={<Consult />} />
+         <Route path="/contract" element={<Contract />} />
+         <Route path="/international-send" element={<InternationalSend />} />
       </Routes>
     </BrowserRouter>
   );
