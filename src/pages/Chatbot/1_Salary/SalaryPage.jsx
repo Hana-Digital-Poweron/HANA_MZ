@@ -7,35 +7,33 @@ import Message from "./Message";
 import ChatBox from "./ChatBox";
 import Date from "./Date";
 import { AISpeechBubble } from "../../../styles/commonStyles/AISpeechBubble";
+import { Option } from "../../../styles/commonStyles/OptionStyle";
+import { predefinedResponses, buttonActions } from "./response";
 
-/* 전체 컨테이너 */
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - 77px);
   overflow-y: scroll;
 
-  //스크롤바 숨기기
   &::-webkit-scrollbar {
     display: none;
   }
-  // 모바일 반응형
+
   @media (hover: hover) {
     width: 390px;
     margin: 0 auto;
   }
 `;
 
-/* Nav 제외 컨테이너 */
 const Content = styled.div`
   flex: 1;
   padding-bottom: 32px;
   height: 100%;
 `;
 
-/* 입력창 제외한 메시지 영역 */
 const MessageSection = styled.div`
-  height: calc(100% - 38px); //전체 높이 - 입력창 높이
+  height: calc(100% - 38px);
   padding: 39px 23px 0;
   overflow-y: auto;
 
@@ -44,18 +42,17 @@ const MessageSection = styled.div`
   }
 `;
 
-/* AI가 전송한 메시지 영역 */
 const AIMessageComponent = styled.div`
   position: relative;
   padding-top: 62px;
+
   img {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
 `;
 
-/* 언어 설정 */
 const LanguageSettingComponent = styled.div`
   width: 67px;
   height: 22px;
@@ -69,39 +66,49 @@ const LanguageSettingComponent = styled.div`
   line-height: 150%;
   position: absolute;
   top: -29px;
-  right: 0px;
+  right: 0;
 `;
 
 const Salary = () => {
   const navigate = useNavigate();
 
-  const handleOptionClick = (path) => {
-    navigate(path);
-  };
-
+  const [buttonsToShow, setButtonsToShow] = useState([]);
   const [messages, setMessages] = useState([]);
-
   const messageEndRef = useRef(null);
 
-  // 메시지가 업데이트될 때마다 스크롤을 가장 하단으로 이동
+  // 메시지 업데이트마다 스크롤 가장 하단으로 이동
   useEffect(() => {
     if (messages.length > 0) {
       messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
     }
   }, [messages]);
 
-  const predefinedResponses = {
-    안녕: "안녕하세요! 무엇을 도와드릴까요?",
-    날씨: "오늘 날씨는 맑음입니다!",
-    시간: "현재 시간은 로컬 시간으로 보여집니다.",
-  };
-
   const handleSendMessage = (userMessage) => {
     const newMessages = [...messages, { sender: "user", text: userMessage }];
     const response =
-      predefinedResponses[userMessage] || "죄송해요, 이해하지 못했어요.";
+      Object.entries(predefinedResponses).find(([keyword]) =>
+        userMessage.includes(keyword)
+      )?.[1] || "죄송해요, 이해하지 못했어요.";
+
+    // 버튼 표시 조건
+    const buttons = buttonActions.filter((action) =>
+      response.includes(action.keyword)
+    );
+    setButtonsToShow(buttons);
 
     setMessages([...newMessages, { sender: "bot", text: response }]);
+  };
+
+  // 버튼 클릭 동작
+  const buttonActionsMap = {
+    "내 계좌 확인": () => navigate("/accounts-overview"),
+    "거래 내역 확인": () => console.log("거래 내역 확인 클릭됨"),
+  };
+  const handleButtonClick = (buttonText) => {
+    const action = buttonActionsMap[buttonText];
+    if (action) {
+      action();
+    }
   };
 
   return (
@@ -123,7 +130,12 @@ const Salary = () => {
           {messages.map((msg, index) => (
             <Message key={index} sender={msg.sender} text={msg.text} />
           ))}
-          <div ref={messageEndRef} /> {/* 마지막 메시지 참조를 위한 div */}
+          {buttonsToShow.map((button, index) => (
+            <Option key={index} onClick={() => handleButtonClick(button.text)}>
+              {button.text}
+            </Option>
+          ))}
+          <div ref={messageEndRef} />
         </MessageSection>
         <LanguageSettingComponent>Language</LanguageSettingComponent>
         <ChatBox onSendMessage={handleSendMessage} />
