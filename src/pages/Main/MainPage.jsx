@@ -3,9 +3,8 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import Nav from "../../components/Nav";
-import { AISpeechBubble } from "../../styles/commonStyles/AISpeechBubble";
-// import { UserSpeechBubble } from "../../styles/commonStyles/UserSpeechBubble";
-import { Option } from "../../styles/commonStyles/OptionStyle";
+import { AISpeechBubble, Option } from "../../styles/CommonStyles";
+// import { UserSpeechBubble } from "../../styles/CommonStyles";
 
 /* 전체 컨테이너 */
 const Container = styled.div`

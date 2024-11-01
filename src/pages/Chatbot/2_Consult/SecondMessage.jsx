@@ -1,5 +1,6 @@
 import React from "react";
-import { AIMessageComponent, AISpeechBubble, OptionList, Option } from "../../../styles/CommonStyles";
+import { AISpeechBubble, OptionList, Option } from "../../../styles/CommonStyles";
+import { AIMessageComponent } from "./ConsultPage";
 
 const SecondMessage = () => {
   return (

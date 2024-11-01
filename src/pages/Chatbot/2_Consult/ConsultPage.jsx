@@ -8,7 +8,7 @@ import ChatBox from "./ChatBox";
 import Date from "./Date";
 import SecondMessage from "./SecondMessage";
 
-import { AIMessageComponent, AISpeechBubble } from "../../../styles/commonStyles";
+import { AISpeechBubble, UserSpeechBubble } from "../../../styles/CommonStyles";
 
 /* 전체 컨테이너 */
 const Container = styled.div`
@@ -72,16 +72,14 @@ const DateDisplay = styled.div`
   }
 `;
 
-/* AI가 전송한 메시지 영역 */
-const AIMessageComponent = styled.div`
+export const AIMessageComponent = styled.div`
   position: relative;
-  first-child {
-    padding-top: 62px;
-}
+  padding-top: 62px;
+
   img {
     position: absolute;
-    top: 0px;
-    left: 0px;
+    top: 0;
+    left: 0;
   }
 `;
 
@@ -169,9 +167,15 @@ const Consult = () => {
                 <MessageSection>
                 <Date />
                     <AIMessageComponent>
-                      <img src={`${process.env.PUBLIC_URL}/assets/images/logos/chatbotOwlLogo.svg`} alt="logo" width="61px" />
-                      <AISpeechBubble>저는 여러분의 유학 생활을 돕는 챗봇입니다. 
-                      궁금한 부분이 있으시면 얼마든지 물어보세요!</AISpeechBubble>
+                    <img
+                        src={`${process.env.PUBLIC_URL}/assets/images/logos/chatbotOwlLogo.svg`}
+                        alt="logo"
+                        width="61px"
+                      />
+                      <AISpeechBubble>
+                        저는 여러분의 유학 생활을 돕는 챗봇입니다. 궁금한 부분이 있으시면
+                        얼마든지 물어보세요!
+                      </AISpeechBubble>
                     </AIMessageComponent>
                      <UserMessageComponent>
                       <UserSpeechBubble>근로 중 부당한 일을 겪어서 상담하고 싶어</UserSpeechBubble>
