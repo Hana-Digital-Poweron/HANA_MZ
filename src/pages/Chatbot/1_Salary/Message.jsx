@@ -1,6 +1,6 @@
 // Message.js
 import React from "react";
-import { AISpeechBubble, UserSpeechBubble } from "../../../styles/commonStyles";
+import { AISpeechBubble, UserSpeechBubble } from "../../../styles/CommonStyles";
 
 const BotMessage = ({ text }) => <AISpeechBubble>{text}</AISpeechBubble>;
 
