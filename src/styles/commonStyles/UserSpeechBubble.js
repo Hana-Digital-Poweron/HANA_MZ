@@ -14,6 +14,7 @@ export const UserSpeechBubble = styled.div`
   font-weight: 500;
   line-height: 150%;
   letter-spacing: -0.91px;
+  text-align: left;
 
   &:after {
     content: ""; // 삼각형을 생성
