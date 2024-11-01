@@ -1,5 +1,5 @@
 import React from "react";
-import { AISpeechBubble, OptionList, Option } from "../../../styles/CommonStyles";
+import { OptionList, Option } from "../../../styles/CommonStyles";
 
 const SecondMessage = ({ onSelect }) => {
   return (
