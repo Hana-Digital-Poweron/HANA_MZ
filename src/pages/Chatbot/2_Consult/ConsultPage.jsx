@@ -3,8 +3,12 @@ import { styled } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import Nav from "../../../components/Nav";
-import { AISpeechBubble } from "../../../styles/commonStyles/AISpeechBubble";
-import { UserSpeechBubble } from "../../../styles/commonStyles/UserSpeechBubble";
+import Message from "./Message";
+import ChatBox from "./ChatBox";
+import Date from "./Date";
+import SecondMessage from "./SecondMessage";
+
+import { AIMessageComponent, AISpeechBubble } from "../../../styles/commonStyles";
 
 /* 전체 컨테이너 */
 const Container = styled.div`
@@ -81,8 +85,6 @@ const AIMessageComponent = styled.div`
   }
 `;
 
-
-
 /* 사용자가 전송한 메시지 영역 */
 const UserMessageComponent = styled.div`
    display: flex; 
@@ -150,26 +152,22 @@ const Consult = () => {
     const navigate = useNavigate();
     const [showSecondMessage, setShowSecondMessage] = useState(false);
 
+    // 1초 후에 메시지를 표시
     useEffect(() => {
         const timer = setTimeout(() => {
             setShowSecondMessage(true);
-        }, 1000); // 1초 후에 메시지를 표시
+        }, 1000); 
 
         return () => clearTimeout(timer);
     }, []);
 
-    const handleOptionClick = (path) => {
-      navigate(path);
-  };
-
+  
+    
     return (
         <Container>
             <Content>
                 <MessageSection>
-                    <DateDisplay>
-                      <img src={`${process.env.PUBLIC_URL}/assets/images/chat/date.svg`} alt="date" />
-                      <p>2024.12.04</p>
-                    </DateDisplay>
+                <Date />
                     <AIMessageComponent>
                       <img src={`${process.env.PUBLIC_URL}/assets/images/logos/chatbotOwlLogo.svg`} alt="logo" width="61px" />
                       <AISpeechBubble>저는 여러분의 유학 생활을 돕는 챗봇입니다. 
@@ -178,11 +176,7 @@ const Consult = () => {
                      <UserMessageComponent>
                       <UserSpeechBubble>근로 중 부당한 일을 겪어서 상담하고 싶어</UserSpeechBubble>
                     </UserMessageComponent> 
-                    {showSecondMessage && (
-                      <AIMessageComponent id="second">
-                        <AISpeechBubble>근로 중 부당한 일을 경험하셨군요😢.  어떤 상황인지 자세히 알려주세요.</AISpeechBubble>
-                      </AIMessageComponent>
-                    )}
+                    {showSecondMessage && <SecondMessage />}
                 </MessageSection>
 
                 <ChatSendSection>

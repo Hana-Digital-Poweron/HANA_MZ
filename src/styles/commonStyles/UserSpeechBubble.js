@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const UserSpeechBubble = styled.div`
   background-color: #21B8BF;
-  width: 253px;
+  width: 220px;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
