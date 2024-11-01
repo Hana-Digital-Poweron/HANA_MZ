@@ -6,8 +6,7 @@ import Nav from "../../../components/Nav";
 import Message from "./Message";
 import ChatBox from "./ChatBox";
 import Date from "./Date";
-import { AISpeechBubble } from "../../../styles/commonStyles/AISpeechBubble";
-import { Option } from "../../../styles/commonStyles/OptionStyle";
+import { AISpeechBubble , Option} from "../../../styles/CommonStyles";
 import { predefinedResponses, buttonActions } from "./response";
 
 const Container = styled.div`
