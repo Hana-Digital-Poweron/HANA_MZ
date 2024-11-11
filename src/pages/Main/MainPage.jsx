@@ -34,6 +34,7 @@ const MessageSection = styled.div`
   padding: 39px 23px 0;
 `;
 
+//봇, 유저, 파일 구분
 const MessageContainer = styled.div`
   display: flex;
   justify-content: ${({ align }) => (align === 'left' ? 'flex-start' : 'flex-end')};
@@ -43,7 +44,6 @@ const MessageContainer = styled.div`
   line-height: 150%;
   letter-spacing: -0.91px;
 `;
-
 const MessageBubble = styled.span`
   display: inline-block;
   padding: 10px;
@@ -77,8 +77,6 @@ const MessageBubble = styled.span`
         : `transparent transparent transparent #21B8BF`};
   }
 `;
-
-
 const FileBubble = styled(MessageBubble)`
   border-radius: 10px;
   border: 1.5px solid var(--Gray-Font3, #021615);
@@ -184,6 +182,7 @@ const Main = () => {
     setOptions([]);
     setIsTyping(true);
 
+    //첫번째 선택지 1. 상담
     if (choice === '근로 중 부당한 일을 겪어서 상담하고 싶어') {
       addMessage(choice, 'user');
       delayMessage('근로 중 부당한 일을 경험하셨군요😢.\n어떤 상황인지 자세히 알려주세요.', 'bot', 500);
@@ -199,6 +198,7 @@ const Main = () => {
       }, 1000);
     } 
     
+    //첫번째 선택지 2.월급
     else if (choice === '월급(근로비)이 들어왔는지 확인하고 싶어') {
       addMessage(choice, 'user');
       delayMessage('12월 4일 기준으로 이번 달 월급이 임금되어 있어요! 계좌를 확인하시겠어요?', 'bot', 500);
@@ -210,16 +210,19 @@ const Main = () => {
       }, 1000);
     } 
     
+    //첫번째 선택지 3. 번역
     else if (choice === '근로계약서를 번역해줘') {
       addMessage(choice, 'user');
       delayMessage('사진으로 찍은 계약서에서 자동으로 중요한 내용을 추출하고 번역해드릴 수 있어요. 근로계약서 사진을 업로드해주세요.', 'bot', 500);
       setIsUserPhotoShown(true)
     } 
 
+    //첫번째 선택지 4. 해외송금
     else if (choice === '해외로 송금하고 싶어') {
       //해외송금 페이지로 navigate
     } 
     
+    // 상담 - 어떤 차별?
     else if (choice === '직장에서 차별을 당했어') {
       addMessage(choice, 'user');
       delayMessage('직장에서 차별을 경험하셨군요.\n어떤 종류의 차별을 당하셨는지 알려주실 수 있을까요?', 'bot', 500);
@@ -234,12 +237,14 @@ const Main = () => {
       }, 1000);
     } 
     
+    // 상담 - 진술서 작성 -> 파일 생성 
     else if (choice === '인종이나 국적 차별') {
       addMessage(choice, 'user');
       delayMessage('차별이 발생한 구체적인 상황을 입력해 주세요. 이 정보는 진술서에 포함됩니다.', 'bot', 500);
       setIsUserResponseShown(true); // 유저 응답 자동 표시 준비 상태로 설정
     } 
     
+    // 상담 - 신고 접수
     else if (choice === '학교 법률 센터') {
       addMessage(choice, 'user');
       delayMessage(
@@ -249,8 +254,14 @@ const Main = () => {
       );
       setOptions([]);
     }
+
+    //피그마에 플로우가 없는 선택지들
+    else if (choice === '월급을 받지 못했어' || '부당하게 해고되었어' || '언어적 / 신체적 학대를 당했어' || '기타 (직접 입력)' || '성별 또는 성 정체성 차별' || '종교 또는 신념에 따른 차별' || '노동청' || '기타') {
+      addMessage("아직 개발 중인 기능입니다. 새로고침해주세요.", 'bot');
+    }
   };
 
+  // 상담 - 진술서 작성 n초마다 출력되도록
   useEffect(() => {
     if (isUserResponseShown) {
       setTimeout(() => {
@@ -276,6 +287,7 @@ const Main = () => {
     }
   }, [isUserResponseShown]);
   
+  // 근로계약서 번역 - 사진 n초마다 출력되도록
   useEffect(() => {
     if (isUserPhotoShown) {
       setTimeout(() => {
