@@ -5,7 +5,7 @@ import { styled } from "styled-components";
 const DateDisplay = styled.div`
   position: relative;
   text-align: center;
-  height: 111px;
+  height: 90px;
 
   img {
     position: absolute;

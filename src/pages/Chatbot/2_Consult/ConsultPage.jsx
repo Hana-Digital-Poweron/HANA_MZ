@@ -73,7 +73,7 @@ const MessageBubble = styled.span`
     border-color: ${({ align, theme }) =>
       align === 'left'
         ? `transparent ${theme.color.Gray} transparent transparent`
-        : `transparent transparent transparent #21B8BF`};  // Right-aligned: Triangle pointing to the right
+        : `transparent transparent transparent #21B8BF`};
   }
 `;
 
