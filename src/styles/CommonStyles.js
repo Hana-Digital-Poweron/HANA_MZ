@@ -28,28 +28,6 @@ export const AISpeechBubble = styled.div`
   }
 `;
 
-export const OptionList = styled.div`
-  margin: 18px 0;
-  display: flex;
-  flex-direction: column;
-  gap: 9px;
-`;
-
-export const Option = styled.div`
-  width: 214px;
-  height: 32px;
-  border-radius: 10px;
-  border: 1px solid ${({ theme }) => theme.color.Font1}; 
-  background: #FFF;
-  color: ${({ theme }) => theme.color.Font3}; 
-  font-size: 11px;
-  font-weight: 500;
-  line-height: 150%;
-  letter-spacing: -0.77px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
 
 export const UserSpeechBubble = styled.div`
   background-color: #21B8BF;
@@ -79,4 +57,28 @@ export const UserSpeechBubble = styled.div`
   }
 `;
 
+export const OptionList = styled.div`
+  margin: 18px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+`;
 
+export const Option = styled.div`
+  width: 214px;
+  height: 32px;
+  border-radius: 10px;
+  border: 1px solid ${({ theme }) => theme.color.Font1}; 
+  background: ${({ isSpecial }) => (isSpecial ? 'var(--Green-Button, #21B8BF)' : '#eee')};
+  color: ${({ isSpecial }) => (isSpecial ? 'white' : '#333')};
+  font-size: 11px;
+  font-weight: 500;
+  line-height: 150%;
+  letter-spacing: -0.77px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:hover {
+    opacity: 0.8;
+  }
+`;
