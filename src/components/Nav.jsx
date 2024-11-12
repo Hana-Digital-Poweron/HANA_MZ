@@ -1,10 +1,10 @@
-import React from 'react';
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import React from "react";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const NavContainer = styled.nav`
   border-radius: 12px 12px 0px 0px;
-  box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.10);
+  box-shadow: 0px 0px 20px 4px rgba(0, 0, 0, 0.1);
   height: 77px;
   padding: 18px;
   display: flex;
@@ -31,36 +31,52 @@ const NavLink = styled(Link)`
 `;
 
 const NavIcon = styled.img`
-  width: ${(props) => (props.home ? '33.135px' : '25px')};
-  height: ${(props) => (props.home ? '33px' : '25px')};
+  width: ${(props) => (props.home ? "33.135px" : "25px")};
+  height: ${(props) => (props.home ? "33px" : "25px")};
   margin-bottom: 4px;
 `;
 
 const NavText = styled.div`
-  ${(props) => props.home && 'margin-right: 7px;'}
+  ${(props) => props.home && "margin-right: 7px;"}
 `;
 
 const Nav = () => {
   return (
     <NavContainer>
-      <NavLink to="">
-        <NavIcon src={`${process.env.PUBLIC_URL}/assets/images/nav/home.svg`} alt="Home" home />
+      <NavLink to="/main">
+        <NavIcon
+          src={`${process.env.PUBLIC_URL}/assets/images/nav/home.svg`}
+          alt="Home"
+          home
+        />
         <NavText home>홈</NavText>
       </NavLink>
-      <NavLink to="">
-        <NavIcon src={`${process.env.PUBLIC_URL}/assets/images/nav/check.svg`} alt="Inquiry" />
+      <NavLink to="/account-overview">
+        <NavIcon
+          src={`${process.env.PUBLIC_URL}/assets/images/nav/check.svg`}
+          alt="Inquiry"
+        />
         <div>조회</div>
       </NavLink>
       <NavLink to="">
-        <NavIcon src={`${process.env.PUBLIC_URL}/assets/images/nav/transfer.svg`} alt="Transfer" />
+        <NavIcon
+          src={`${process.env.PUBLIC_URL}/assets/images/nav/transfer.svg`}
+          alt="Transfer"
+        />
         <div>이체</div>
       </NavLink>
       <NavLink to="">
-        <NavIcon src={`${process.env.PUBLIC_URL}/assets/images/nav/sendMoney.svg`} alt="Remittance" />
+        <NavIcon
+          src={`${process.env.PUBLIC_URL}/assets/images/nav/sendMoney.svg`}
+          alt="Remittance"
+        />
         <div>송금</div>
       </NavLink>
-      <NavLink to="">
-        <NavIcon src={`${process.env.PUBLIC_URL}/assets/images/nav/menu.svg`} alt="Menu" />
+      <NavLink to="/menu">
+        <NavIcon
+          src={`${process.env.PUBLIC_URL}/assets/images/nav/menu.svg`}
+          alt="Menu"
+        />
         <div>메뉴</div>
       </NavLink>
     </NavContainer>

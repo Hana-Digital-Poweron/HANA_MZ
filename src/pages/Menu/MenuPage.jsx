@@ -137,15 +137,15 @@ const InsideIcon = styled.span`
 const Menu = () => {
   const navigate = useNavigate();
 
-  const handleOptionClick = (path) => {
-    navigate(path);
+  const handleLogout = () => {
+    navigate("/");
   };
 
   return (
     <Container>
       <Content>
         <Header>
-          <div id="logout"></div>
+          <div id="logout" onClick={handleLogout}></div>
           <div id="setting"></div>
         </Header>
         <GreetingContainer>

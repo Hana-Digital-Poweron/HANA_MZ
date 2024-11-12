@@ -1,4 +1,5 @@
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
 /* 전체 컨테이너 */
@@ -206,12 +207,19 @@ const transactions = [
 ];
 
 const AccountDetailPage = () => {
+  const navigate = useNavigate();
+  const handleGoBack = () => {
+    navigate(-1);
+  };
+  const handleGoHome = () => {
+    navigate("/");
+  };
   return (
     <Container>
       <AccountHeader>
         <HeaderTitle>거래내역조회</HeaderTitle>
-        <BackBtn />
-        <CloseBtn />
+        <BackBtn onClick={handleGoBack} />
+        <CloseBtn onClick={handleGoHome} />
         <AccountInfo>
           <div>
             <div id="account-title">저축예금</div>

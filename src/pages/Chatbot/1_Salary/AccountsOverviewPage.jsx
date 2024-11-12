@@ -1,7 +1,7 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { styled } from "styled-components";
 
-/* 전체 컨테이너 */
 const Container = styled.div`
   display: flex;
   flex-direction: column;
@@ -9,11 +9,10 @@ const Container = styled.div`
   height: calc(100vh - 77px);
   overflow-y: scroll;
 
-  //스크롤바 숨기기
   &::-webkit-scrollbar {
     display: none;
   }
-  // 모바일 반응형
+
   @media (hover: hover) {
     width: 390px;
     margin: 0 auto;
@@ -55,7 +54,6 @@ const CloseBtn = styled.div`
   cursor: pointer;
 `;
 
-// 토글 버튼
 const ToggleContainer = styled.div`
   margin-top: 35px;
   width: 376px;
@@ -102,7 +100,6 @@ const Notification = styled.div`
   margin-top: 40px;
 `;
 
-// 카드
 const CardContainer = styled.div`
   width: 369px;
   height: 200px;
@@ -112,15 +109,12 @@ const CardContainer = styled.div`
   box-shadow: 0px 4px 6.8px 4px rgba(0, 0, 0, 0.15);
 `;
 
-// 계좌 정보 부분 스타일
 const AccountInfo = styled.div`
   margin: auto;
   width: 300px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  #wrapper {
-  }
   #account-title {
     font-size: 16px;
     font-weight: bold;
@@ -142,7 +136,6 @@ const CopyIcon = styled.div`
   background-size: cover;
 `;
 
-// 잔액 부분 스타일
 const BalanceSection = styled.div`
   display: flex;
   justify-content: flex-end;
@@ -159,7 +152,6 @@ const Currency = styled.span`
   margin-right: 7px;
 `;
 
-// 하단 버튼 스타일
 const ButtonContainer = styled.div`
   display: flex;
   border-top: 1px solid #e0e0e0;
@@ -177,13 +169,11 @@ const ActionButton = styled.div`
   }
 `;
 
-const SlideToggleButton = () => {
-  const [active, setActive] = useState(false);
-
+const SlideToggleButton = ({ active, setActive }) => {
   return (
     <ToggleContainer>
       <Slider active={active} />
-      <div class="wrapper">
+      <div className="wrapper">
         <ToggleButton isSelected={!active} onClick={() => setActive(false)}>
           하나은행
         </ToggleButton>
@@ -196,10 +186,28 @@ const SlideToggleButton = () => {
 };
 
 const AccountCard = () => {
+  const navigate = useNavigate();
+
+  const navigateAccountdetail = () => {
+    navigate("/account-detail");
+  };
+
+  // 계좌 복사
+  const copyToClipboard = () => {
+    const accountNumberElement = document.getElementById("account-number");
+    if (accountNumberElement) {
+      const accountNumber = accountNumberElement.textContent;
+      navigator.clipboard.writeText(accountNumber).then(
+        () => alert("계좌번호가 복사되었습니다."),
+        (err) => console.error("다시 한 번 시도해주세요.", err)
+      );
+    }
+  };
+
   return (
     <CardContainer>
       <AccountInfo>
-        <div>
+        <div style={{ cursor: "pointer" }} onClick={navigateAccountdetail}>
           <div id="account-title">
             저축예금 &nbsp;
             <img
@@ -208,26 +216,34 @@ const AccountCard = () => {
           </div>
           <div id="account-number">123-456789-0123</div>
         </div>
-        <CopyIcon />
+        <CopyIcon onClick={copyToClipboard} />
       </AccountInfo>
       <BalanceSection>
         <Currency>KRW</Currency>1,000,186
       </BalanceSection>
       <ButtonContainer>
-        <ActionButton>이체</ActionButton>
-        <ActionButton>송금</ActionButton>
+        <ActionButton onClick={navigateAccountdetail}>이체</ActionButton>
+        <ActionButton onClick={navigateAccountdetail}>송금</ActionButton>
       </ButtonContainer>
     </CardContainer>
   );
 };
 
 const AccountsOverviewPage = () => {
+  const navigate = useNavigate();
+
+  const handleGoHome = () => {
+    navigate("/");
+  };
+
+  const [active, setActive] = useState(false);
+
   return (
     <Container>
       <AccountHeader>
         <HeaderTitle>보유계좌조회</HeaderTitle>
-        <CloseBtn></CloseBtn>
-        <SlideToggleButton />
+        <CloseBtn onClick={handleGoHome}></CloseBtn>
+        <SlideToggleButton active={active} setActive={setActive} />
         <Notification>
           <img
             src={`${process.env.PUBLIC_URL}/assets/images/account/notice.svg`}
@@ -235,7 +251,7 @@ const AccountsOverviewPage = () => {
           />
         </Notification>
       </AccountHeader>
-      <AccountCard></AccountCard>
+      {!active && <AccountCard />}
     </Container>
   );
 };
