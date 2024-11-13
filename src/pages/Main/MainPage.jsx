@@ -239,7 +239,13 @@ const Main = () => {
 
     //첫번째 선택지 4. 해외송금
     else if (choice === "해외로 송금하고 싶어") {
-      //해외송금 페이지로 navigate
+      addMessage(choice, "user");
+  setIsTyping(true); // 챗봇 타이핑 표시
+  
+  // 2초 후에 internationalsend 페이지로 이동
+  setTimeout(() => {
+    navigate("/international-send");
+  }, 2000);
     }
 
     // 상담 - 어떤 차별?
