@@ -1,25 +1,43 @@
-import React from "react";
-import { styled } from "styled-components";
+import React, { useState } from "react";
+import { styled, keyframes } from "styled-components";
 import { useNavigate } from "react-router-dom";
 
 import Nav from "../../components/Nav";
 import { AISpeechBubble } from "../../styles/commonStyles/AISpeechBubble";
-// import { UserSpeechBubble } from "../../styles/commonStyles/UserSpeechBubble";
 import { Option } from "../../styles/commonStyles/OptionStyle";
+
+/* 채팅 메시지 나타나는 애니메이션 */
+const fadeIn = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+/* 로딩 애니메이션 */
+const dots = keyframes`
+  0% { content: ''; }
+  33% { content: '.'; }
+  66% { content: '..'; }
+  100% { content: '...'; }
+`;
 
 /* 전체 컨테이너 */
 const Container = styled.div`
   display: flex;
   flex-direction: column;
   height: calc(100vh - 77px);  
-  overflow-y: scroll; 
+  overflow-y: scroll;
 
-  //스크롤바 숨기기
   &::-webkit-scrollbar {
       display: none;
-    }
-  // 모바일 반응형
-    @media (hover: hover) {
+  }
+
+  @media (hover: hover) {
     width: 390px; 
     margin: 0 auto;
   }
@@ -30,7 +48,7 @@ const Content = styled.div`
   flex: 1;
   overflow-y: auto;
   padding-bottom: 32px;
-  height: 100%; 
+  height: 100%;
 
   &::-webkit-scrollbar {
     display: none;
@@ -39,8 +57,8 @@ const Content = styled.div`
 
 /* 입력창 제외한 메시지 영역 */
 const MessageSection = styled.div`
-  height: calc(100% - 38px); //전체 높이 - 입력창 높이
-  padding : 39px 23px 0;
+  height: calc(100% - 38px);
+  padding: 39px 23px 0;
 `;
 
 /* 날짜 바 */
@@ -89,11 +107,37 @@ const OptionList = styled.div`
 `;
 
 /* 사용자가 전송한 메시지 영역 */
-// const UserMessageComponent = styled.div`
-//   display: flex; 
-//   justify-content: flex-end;
-//   margin: 0;
-// `;
+const UserMessageComponent = styled.div`
+  display: inline-block;
+  background-color: #E0F7FA;
+  color: #00796B;
+  padding: 12px 16px;
+  border-radius: 15px;
+  margin: 10px 0;
+  align-self: flex-end; /* 사용자 메시지를 오른쪽으로 정렬 */
+  font-size: 14px;
+  line-height: 1.5;
+  animation: ${fadeIn} 0.4s ease-out;
+  
+  /* 메시지 길이에 따라 유동적으로 조절 */
+  max-width: 70%; /* 최대 폭을 설정 */
+  word-wrap: break-word; /* 텍스트가 너무 길 때 줄바꿈 */
+  white-space: pre-wrap; /* 연속 공백이나 줄바꿈을 유지 */
+`;
+
+/* 로딩 메시지 */
+const LoadingMessage = styled.div`
+  color: #00796B;
+  font-size: 14px;
+  font-weight: 500;
+  align-self: flex-end; /* 로딩 메시지도 사용자 메시지처럼 오른쪽 정렬 */
+  margin: 10px 0;
+  animation: ${fadeIn} 0.4s ease-out;
+
+  &::after {
+    animation: ${dots} 1s steps(4, end) infinite;
+  }
+`;
 
 /* 입력창 */
 const ChatSendSection = styled.div`
@@ -153,10 +197,19 @@ const FileUploadButtonComponent = styled.button`
 
 const Main = () => {
     const navigate = useNavigate();
+    const [userMessages, setUserMessages] = useState([]);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const handleOptionClick = (path) => {
-      navigate(path);
-  };
+    const handleOptionClick = (message, path) => {
+        setUserMessages([...userMessages, message]); // 사용자가 클릭한 메시지 추가
+        setIsLoading(true); // 로딩 상태 활성화
+
+        // 3초 후에 페이지 이동
+        setTimeout(() => {
+            setIsLoading(false); // 로딩 상태 비활성화
+            navigate(path);
+        }, 3000);
+    };
 
     return (
         <Container>
@@ -171,19 +224,28 @@ const Main = () => {
                       <AISpeechBubble>저는 여러분의 유학 생활을 돕는 챗봇입니다. 
                       궁금한 부분이 있으시면 얼마든지 물어보세요!</AISpeechBubble>
                     </AIMessageComponent>
-                    <OptionList>
-                        <Option onClick={() => handleOptionClick('/salary')}>
-                          월급(근로비)이 들어왔는지 확인하고 싶어</Option>
-                        <Option onClick={() => handleOptionClick('/consult')}>
-                          근로 중 부당한 일을 겪어서 상담하고 싶어</Option>
-                        <Option onClick={() => handleOptionClick('/contract')}>
-                          근로계약서를 번역해줘</Option>
-                        <Option onClick={() => handleOptionClick('/international-send')}>
-                          해외로 송금하고 싶어</Option>
-                    </OptionList>
-                    {/* <UserMessageComponent>
-                      <UserSpeechBubble>월급(근로비)이 들어왔는지 확인하고 싶어</UserSpeechBubble>
-                    </UserMessageComponent> */}
+                    
+                    {/* 사용자 메시지 출력 */}
+                    {userMessages.map((msg, index) => (
+                        <UserMessageComponent key={index}>{msg}</UserMessageComponent>
+                    ))}
+
+                    {/* 로딩 중 메시지 출력 */}
+                    {isLoading && <LoadingMessage>Loading</LoadingMessage>}
+
+                    {/* 로딩 중이 아닐 때만 옵션 목록 표시 */}
+                    {!isLoading && (
+                      <OptionList>
+                          <Option onClick={() => handleOptionClick("월급(근로비)이 들어왔는지 확인하고 싶어", '/salary')}>
+                            월급(근로비)이 들어왔는지 확인하고 싶어</Option>
+                          <Option onClick={() => handleOptionClick("근로 중 부당한 일을 겪어서 상담하고 싶어", '/consult')}>
+                            근로 중 부당한 일을 겪어서 상담하고 싶어</Option>
+                          <Option onClick={() => handleOptionClick("근로계약서를 번역해줘", '/contract')}>
+                            근로계약서를 번역해줘</Option>
+                          <Option onClick={() => handleOptionClick("해외로 송금하고 싶어", '/international-send')}>
+                            해외로 송금하고 싶어</Option>
+                      </OptionList>
+                    )}
                 </MessageSection>
                 <ChatSendSection>
                     <LanguageSettingComponent>
