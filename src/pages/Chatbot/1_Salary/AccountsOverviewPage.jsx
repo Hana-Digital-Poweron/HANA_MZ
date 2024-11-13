@@ -56,7 +56,7 @@ const CloseBtn = styled.div`
 
 const ToggleContainer = styled.div`
   margin-top: 35px;
-  width: 376px;
+  width: 370px;
   height: 43px;
   padding: 5px;
   border-radius: 22px;
@@ -87,8 +87,8 @@ const ToggleButton = styled.div`
 const Slider = styled.div`
   position: absolute;
   top: 4px;
-  left: ${({ active }) => (active ? "186px" : "3px")};
-  width: 186px;
+  left: ${({ active }) => (active ? "183px" : "3px")};
+  width: 183px;
   height: 35px;
   border-radius: 22px;
   background-color: #ffffff;
@@ -101,7 +101,7 @@ const Notification = styled.div`
 `;
 
 const CardContainer = styled.div`
-  width: 369px;
+  width: 85%;
   height: 200px;
   padding-top: 20px;
   border-radius: 22px;
@@ -111,7 +111,7 @@ const CardContainer = styled.div`
 
 const AccountInfo = styled.div`
   margin: auto;
-  width: 300px;
+  width: 250px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -129,7 +129,7 @@ const AccountInfo = styled.div`
 const CopyIcon = styled.div`
   width: 18px;
   height: 21px;
-  right: 0px;
+  right: 30%;
   cursor: pointer;
   background-image: url(${process.env
     .PUBLIC_URL}/assets/images/account/copy.svg);
@@ -187,7 +187,6 @@ const SlideToggleButton = ({ active, setActive }) => {
 
 const AccountCard = () => {
   const navigate = useNavigate();
-
   const navigateAccountdetail = () => {
     navigate("/account-detail");
   };
@@ -231,7 +230,6 @@ const AccountCard = () => {
 
 const AccountsOverviewPage = () => {
   const navigate = useNavigate();
-
   const handleGoHome = () => {
     navigate("/");
   };

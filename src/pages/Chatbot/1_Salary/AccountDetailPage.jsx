@@ -6,7 +6,7 @@ import { styled } from "styled-components";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  height: calc(100vh - 77px);
+  height: calc(100vh - 25px);
   overflow-y: scroll;
 
   //스크롤바 숨기기
@@ -115,7 +115,7 @@ const TranHeader = styled.div`
 `;
 
 const TranItem = styled.div`
-  height: 96px;
+  height: 90px;
   border-bottom: 1px solid #d9d9d9;
   display: flex;
   padding-left: 33px;
@@ -159,9 +159,19 @@ const TranItem = styled.div`
     right: 34px;
   }
 `;
+
+const ItemContainer = styled.div`
+  overflow-y: scroll;
+
+  //스크롤바 숨기기
+  &::-webkit-scrollbar {
+    display: none;
+  }
+`;
+
 const FloatBtn = styled.div`
   position: fixed;
-  margin-left: 330px;
+  right: 20px;
   bottom: 30px;
   display: flex;
   flex-direction: column;
@@ -237,18 +247,20 @@ const AccountDetailPage = () => {
           src={`${process.env.PUBLIC_URL}/assets/images/account/setting.svg`}
         />
       </TranHeader>
-      {transactions.map((transaction) => (
-        <TranItem
-          key={transaction.id}
-          isGrey={transaction.id === 1}
-          isHighlight={transaction.id === 1}
-        >
-          <div id="name">{transaction.name}</div>
-          <div id="date">{transaction.date}</div>
-          <div id="price">{transaction.price}</div>
-          <div id="balance">{transaction.balance}</div>
-        </TranItem>
-      ))}
+      <ItemContainer>
+        {transactions.map((transaction) => (
+          <TranItem
+            key={transaction.id}
+            isGrey={transaction.id === 1}
+            isHighlight={transaction.id === 1}
+          >
+            <div id="name">{transaction.name}</div>
+            <div id="date">{transaction.date}</div>
+            <div id="price">{transaction.price}</div>
+            <div id="balance">{transaction.balance}</div>
+          </TranItem>
+        ))}
+      </ItemContainer>
       <FloatBtn>
         <img
           src={`${process.env.PUBLIC_URL}/assets/images/account/button.svg`}
