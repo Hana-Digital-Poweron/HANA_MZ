@@ -65,17 +65,17 @@ const InternationalSend = () => {
 
   return (
     <Container>
-      <BackButton>
-        <img onClick={handleBackClick}
-                src={`${process.env.PUBLIC_URL}/assets/images/nav/back.svg`}
-                alt="backbtn" />
-</BackButton> {/* 좌측 상단에 배치된 뒤로 가기 버튼 */}
+      <BackButton onClick={handleBackClick}>
+  <img 
+    src="/assets/images/nav/back.svg"
+    alt="backbtn" 
+  />
+</BackButton>
       <Content>
-        <StyledImage>
-        <img src={`${process.env.PUBLIC_URL}/assets/images/InternationalSend/internationalSending_img.svg`}
-          alt="International Send"
-        />
-        </StyledImage>
+      <StyledImage 
+  src="/assets/images/InternationalSend/internationalSending_img.svg"
+  alt="International Send"
+/>
       </Content>
       <Nav />
     </Container>
