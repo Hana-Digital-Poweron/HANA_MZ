@@ -115,6 +115,7 @@ const Key = styled.button`
 /* 삭제 버튼 */
 const DeleteButton = styled(Key)`
   color: #FF6B6B;
+  font-size: 16px;
 `;
 
 const Login = () => {
