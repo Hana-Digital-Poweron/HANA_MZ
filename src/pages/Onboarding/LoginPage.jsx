@@ -125,14 +125,10 @@ const Login = () => {
     if (password.length < 6) {
       const newPassword = password + value;
       setPassword(newPassword);
-
-      // 비밀번호가 6자리까지 입력되면 자동으로 확인
-      if (newPassword === "241204") {
+  
+      // 비밀번호가 6자리가 되면 자동으로 다음 페이지로 이동
+      if (newPassword.length === 6) {
         navigate("/main");
-      } else if (newPassword.length === 6) {
-        // 6자리인데 일치하지 않으면 초기화
-        setPassword("");
-        alert("비밀번호가 틀렸습니다.");
       }
     }
   };
