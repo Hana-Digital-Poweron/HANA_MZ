@@ -153,6 +153,36 @@ const FileUploadButtonComponent = styled.button`
   padding: 0;
   cursor: pointer;
 `;
+// Option을 StyledOption으로 변경
+const StyledOption = styled.button`
+  display: block;
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border: none;
+  background: #f5f5f5; /* 기본 배경색을 회색으로 설정 */
+  color: #333;
+  font-size: 14px;
+  cursor: pointer;
+  border-radius: 5px;
+  text-align: left;
+  transition: background-color 0.3s;
+
+  /* 커서를 올렸을 때 배경색 변경 */
+  &:hover {
+    background-color: #21B8BF;
+    color: #fff; /* 글씨 색도 하얗게 변경 */
+  }
+
+  /* 강조된 옵션이 필요한 경우 */
+  ${({ isSpecial }) =>
+    isSpecial &&
+    `
+    font-weight: bold;
+  `}
+`;
+
+
 
 const Main = () => {
   const navigate = useNavigate();
