@@ -20,7 +20,9 @@ const Content = styled.div`
   flex-direction: column;
   align-items: center;
   opacity: ${({ startAnimationStage }) => (startAnimationStage >= 0 ? 1 : 0)};
-  transform: translateY(${({ startAnimationStage }) => (startAnimationStage >= 0 ? "0" : "20px")});
+  transform: translateY(
+    ${({ startAnimationStage }) => (startAnimationStage >= 0 ? "0" : "20px")}
+  );
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 `;
 
@@ -31,7 +33,9 @@ const LogoContainer = styled.div`
   align-items: center;
   margin-bottom: 20px;
   opacity: ${({ startAnimationStage }) => (startAnimationStage >= 0 ? 1 : 0)};
-  transform: translateY(${({ startAnimationStage }) => (startAnimationStage >= 0 ? "0" : "20px")});
+  transform: translateY(
+    ${({ startAnimationStage }) => (startAnimationStage >= 0 ? "0" : "20px")}
+  );
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 `;
 
@@ -49,7 +53,9 @@ const NameLogo = styled.img`
   width: 200px;
   height: auto;
   margin-top: 10px;
-  transform: translateY(${({ startAnimationStage }) => (startAnimationStage === 1 ? "-40px" : "0")});
+  transform: translateY(
+    ${({ startAnimationStage }) => (startAnimationStage === 1 ? "-40px" : "0")}
+  );
   transition: transform 1s ease-in-out;
 `;
 
@@ -60,7 +66,9 @@ const Subtitle = styled.p`
   color: #333; /* 더 진한 검정색 */
   opacity: 1; /* 서브타이틀은 항상 보이게 설정 */
   margin-top: 5px;
-  transform: translateY(${({ startAnimationStage }) => (startAnimationStage === 1 ? "-40px" : "0")});
+  transform: translateY(
+    ${({ startAnimationStage }) => (startAnimationStage === 1 ? "-40px" : "0")}
+  );
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
 `;
 
@@ -76,19 +84,20 @@ const LoginButton = styled.button`
   font-weight: bold;
   border: none;
   border-radius: 2.03125rem;
-  background: var(--Green-Button, #21B8BF);
+  background: var(--Green-Button, #21b8bf);
   color: white;
   cursor: pointer;
   position: relative; /* 버튼 내에서 부엉이를 위치시키기 위해 상대 위치 설정 */
   opacity: ${({ startAnimationStage }) => (startAnimationStage === 1 ? 1 : 0)};
   transition: opacity 1s ease-in-out, transform 1s ease-in-out;
-  transform: ${({ startAnimationStage }) => (startAnimationStage === 1 ? "scale(1)" : "scale(0.95)")};
+  transform: ${({ startAnimationStage }) =>
+    startAnimationStage === 1 ? "scale(1)" : "scale(0.95)"};
 `;
 
 /* 부엉이 이미지 위치 설정 */
 const OwlOnButton = styled.img`
   position: absolute; /* 버튼 내에서 절대 위치 설정 */
-  top: -35px;  /* 버튼의 위쪽으로 부엉이를 위치 */
+  top: -35px; /* 버튼의 위쪽으로 부엉이를 위치 */
   right: 15px; /* 버튼의 오른쪽으로 부엉이를 위치 */
   width: 40px;
   height: 40px;

@@ -213,7 +213,7 @@ const AccountCard = () => {
               src={`${process.env.PUBLIC_URL}/assets/images/account/inside.svg`}
             />
           </div>
-          <div id="account-number">123-456789-0123</div>
+          <div id="account-number">988-910001-01007</div>
         </div>
         <CopyIcon onClick={copyToClipboard} />
       </AccountInfo>
@@ -231,7 +231,7 @@ const AccountCard = () => {
 const AccountsOverviewPage = () => {
   const navigate = useNavigate();
   const handleGoHome = () => {
-    navigate("/");
+    navigate(-1);
   };
 
   const [active, setActive] = useState(false);

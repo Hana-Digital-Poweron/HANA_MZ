@@ -138,7 +138,7 @@ const Menu = () => {
   const navigate = useNavigate();
 
   const handleLogout = () => {
-    navigate("/");
+    navigate("/main");
   };
 
   return (

@@ -222,7 +222,7 @@ const AccountDetailPage = () => {
     navigate(-1);
   };
   const handleGoHome = () => {
-    navigate("/");
+    navigate("/main");
   };
   return (
     <Container>
@@ -233,7 +233,7 @@ const AccountDetailPage = () => {
         <AccountInfo>
           <div>
             <div id="account-title">저축예금</div>
-            <div id="account-number">123-456789-0123</div>
+            <div id="account-number">988-910001-01007</div>
             <div id="allbalance">
               <span id="currency">KRW &nbsp;</span>1,000,186
             </div>
